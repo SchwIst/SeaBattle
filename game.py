@@ -5,7 +5,7 @@ import colorama
 
 from field import Field
 from player import Player
-from utils import Display, move_print
+from utils import Display, move_print, FILE_TEMPLATE
 
 
 class Game(Display):
@@ -16,8 +16,6 @@ class Game(Display):
     _should_redraw: bool = True
 
     def __init__(self):
-        self._file_template = json.loads("".join(open("file_template.json").readlines()))
-
         colorama.init()
 
         self._print_field_template()
@@ -30,7 +28,7 @@ class Game(Display):
         ]
 
     def create_fields(self):
-        for field in self._file_template["fields"]:
+        for field in FILE_TEMPLATE["fields"]:
             [x, y] = field["position"]
             [width, height] = field["size"]
 
@@ -48,7 +46,19 @@ class Game(Display):
                 self.print()
                 self._should_redraw = False
 
-            self._players[0].react_to_keys(getch())
+            char = getch()
+
+            action = self._players[0].react_to_keys(char)
+
+            if isinstance(action, bool):
+                self._fields[0].create_ship()
+                self._should_redraw = True
+            elif isinstance(action, tuple):
+                self._fields[0].move_last_ship(action)
+                self._should_redraw = True
+            else:
+                self._fields[0].rotate_last_ship(action)
+                self._should_redraw = True
 
     @staticmethod
     def _clear():
@@ -61,7 +71,7 @@ class Game(Display):
     def _print_field_template(self):
         Game._clear()
 
-        with open(self._file_template["filename"], "r", encoding="UTF-8") as file:
+        with open(FILE_TEMPLATE["filename"], "r", encoding="UTF-8") as file:
             for line in file.readlines():
                 print(line.removesuffix("\n"))
 
@@ -69,5 +79,5 @@ class Game(Display):
         for field in self._fields:
             field.print()
 
-        _, move_y = self._file_template["template_size"]
+        _, move_y = FILE_TEMPLATE["template_size"]
         move_print("", 1, move_y)

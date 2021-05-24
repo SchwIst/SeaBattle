@@ -1,7 +1,9 @@
+import json
 from abc import abstractmethod
 
 from colorama import Cursor
 
+FILE_TEMPLATE = json.loads("".join(open("file_template.json").readlines()))
 
 class Display:
     @abstractmethod
@@ -16,11 +18,9 @@ def move_print(text: str, x: int, y: int):
 class MessageBox(Display):
     message: str = ""
 
-    def __init__(self, x, y, width, height):
-        self._x = x
-        self._y = y
-        self._width = width
-        self._height = height
+    def __init__(self,):
+        self._x, self._y = FILE_TEMPLATE["message_box"]["position"]
+        self._width, self._height = FILE_TEMPLATE["message_box"]["size"]
 
     def print(self):
         if len(self.message) > self._width:

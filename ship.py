@@ -1,20 +1,24 @@
 from cells import CellTypes
-from utils import Display, move_print
+from utils import Display, move_print, FILE_TEMPLATE
 
 
 class Ship(Display):
     size: int
     x: int
     y: int
-    is_horizontal: bool
+    _is_horizontal: bool
 
     def __init__(self, size: int, x: int, y: int):
         self.size = size
         self.x = x
         self.y = y
-        self.is_horizontal = True
+        self._is_horizontal = True
 
     def move(self, offset_x: int, offset_y: int):
+        if self.x + offset_x not in range(FILE_TEMPLATE["fields"][0]["size"][0] - ((self.size - 1) if self._is_horizontal else 0)) or \
+                self.y + offset_y not in range(FILE_TEMPLATE["fields"][0]["size"][1] - (0 if self._is_horizontal else (self.size - 1))):
+            return
+
         self.x += offset_x
         self.y += offset_y
 
@@ -22,7 +26,7 @@ class Ship(Display):
         x = 0
         y = 0
 
-        if self.is_horizontal:
+        if self._is_horizontal:
             x = 1
         else:
             y = 1
@@ -39,15 +43,13 @@ class Ship(Display):
         return coordinates
 
     def get_padding_coordinates(self) -> list[tuple[int, int]]:
-        offset_x, offset_y = self._get_vector()
-
         vertical_x, vertical_y = [0, 1]
         horizontal_x, horizontal_y = [1, 0]
 
         padding_positions = []
         for i in range(-1, self.size + 1):
             for j in range(-1, 1 + 1):
-                if self.is_horizontal:
+                if self._is_horizontal:
                     padding_positions.append((
                         vertical_x * j + horizontal_x * i + self.x,
                         vertical_y * j + horizontal_y * i + self.y
@@ -60,5 +62,13 @@ class Ship(Display):
 
         return padding_positions
 
+    def rotate(self):
+        if self.x > FILE_TEMPLATE["fields"][0]["size"][0] - self.size or \
+                self.y > FILE_TEMPLATE["fields"][0]["size"][1] - self.size:
+            return
+
+        self._is_horizontal = not self._is_horizontal
+
     def print(self):
-        move_print(str(CellTypes["ship"]), self.x, self.y)
+        for x, y in self.get_all_coordinates():
+            move_print(str(CellTypes["ship"]), x, y)

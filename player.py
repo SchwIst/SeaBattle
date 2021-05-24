@@ -19,7 +19,7 @@ class Shooter:
             CellTypes["ship"].text: "Вы попали!! 😎",
         }
 
-        cell = field.cells[shoot_y][shoot_x]
+        cell = field.get_cell(shoot_x, shoot_y)
 
         return _match[cell.text]
 
@@ -49,13 +49,14 @@ class Player(Shooter, Display, Input):
             CellTypes["ship"].text: CellTypes[""],
         }
 
-    def react_to_keys(self, pressed_key: bytes) -> Union[tuple[int, int], Callable[[Ship], None]]:
-        _match: dict[bytes, Union[tuple[int, int], Callable[[Ship], None]]] = {
+    def react_to_keys(self, pressed_key: bytes) -> Union[tuple[int, int], Callable[[Ship], None], bool]:
+        _match: dict[bytes, Union[tuple[int, int], Callable[[Ship], None]], bool] = {
             b"w": (0, -1),
             b"a": (-1, 0),
             b"s": (0, 1),
             b"d": (1, 0),
-            b"r": lambda x: x.rotate()
+            b"r": lambda x: x.rotate(),
+            b"e": True
         }
 
         return _match[pressed_key]
