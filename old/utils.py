@@ -38,6 +38,4 @@ class FieldDraw:
 │                                │
 └────────────────────────────────┘"""
 
-
     def mark_player_empty_shoot(coord_x, coord_y):
-

@@ -2,10 +2,9 @@ import json
 import os
 
 import colorama
-from colorama import Cursor
 
 from field import Field
-from utils import Display
+from utils import Display, move_print
 
 
 class Game(Display):
@@ -53,5 +52,4 @@ class Game(Display):
             field.print()
 
         _, move_y = self._file_template["template_size"]
-        print(Cursor.POS(1, move_y))
-
+        move_print("", 1, move_y)

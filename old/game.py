@@ -1,14 +1,12 @@
+import msvcrt
 import os
 
-import keyboard
 import numpy as np
 
 from cell import Cell
-from utils import char_to_vector
 from field import Field
 from ship import Ship
-
-import msvcrt
+from utils import char_to_vector
 
 
 class Game:

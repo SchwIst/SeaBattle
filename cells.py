@@ -15,8 +15,8 @@ class Cell(Display):
         self.foreground = foreground
 
     def __str__(self):
-        return self.background + \
-               self.foreground + \
+        return str(self.background) + \
+               str(self.foreground) + \
                self.text + \
                Fore.RESET + Back.RESET
 
@@ -30,7 +30,6 @@ CellTypes: dict[str, Cell] = {
     "damaged": Cell('X', Fore.RED, Back.WHITE),
     "miss": Cell('•', Fore.BLACK, Back.WHITE),
     "killed": Cell('X', Fore.WHITE, Back.RED),
-    "struck": Cell('0', Fore.YELLOW, Back.RESET)
+    "struck": Cell('0', Fore.YELLOW, Back.RESET),
+    "selected": Cell('S', Fore.BLACK, Back.BLACK)
 }
-
-

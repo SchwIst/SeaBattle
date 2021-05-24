@@ -1,7 +1,5 @@
-from colorama import Cursor
-
 from cells import Cell, CellTypes
-from utils import Display
+from utils import Display, move_print
 
 
 class Field(Display):
@@ -34,6 +32,6 @@ class Field(Display):
     def print(self):
         for x, row in enumerate(self._cells):
             for y, element in enumerate(row):
-                move = Cursor.POS(self._x + x, self._y + y)
+                lx, ly = self._x + x, self._y + y
 
-                print(move + str(element), end='')
+                move_print(str(element), lx, ly)
