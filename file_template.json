@@ -1,0 +1,18 @@
+{
+  "filename": "C:\\Users\\Julia\\SeaBattle\\field_template.txt",
+  "template_size": [35, 19],
+  "fields": [
+    {
+      "position": [6, 5],
+      "size": [10, 10]
+    },
+    {
+      "position": [20, 5],
+      "size": [10, 10]
+    }
+  ],
+  "message_box": {
+    "position": [3, 18],
+    "size": [30, 1]
+  }
+}
