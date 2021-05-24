@@ -4,11 +4,16 @@ import os
 import colorama
 
 from field import Field
+from player import Player
 from utils import Display, move_print
 
 
 class Game(Display):
     _fields: list[Field] = []
+    _players: list[Player] = []
+
+    is_running: bool
+    _should_redraw: bool = True
 
     def __init__(self):
         self._file_template = json.loads("".join(open("file_template.json").readlines()))
@@ -19,18 +24,31 @@ class Game(Display):
 
         self.create_fields()
 
+        self._players = [
+            Player(),
+            Player()
+        ]
+
     def create_fields(self):
         for field in self._file_template["fields"]:
             [x, y] = field["position"]
             [width, height] = field["size"]
 
-            self._fields.append(Field(width, height, x, y))
+            field_object = Field(width, height, x, y)
+            field_object.fill()
+
+            self._fields.append(field_object)
 
     def run(self):
-        for field in self._fields:
-            field.fill()
+        from msvcrt import getch
 
-        self.print()
+        self.is_running = True
+        while self.is_running:
+            if self._should_redraw:
+                self.print()
+                self._should_redraw = False
+
+            self._players[0].react_to_keys(getch())
 
     @staticmethod
     def _clear():

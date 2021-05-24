@@ -46,7 +46,7 @@ class Game:
 
         def intersect() -> bool:
             ships_coords: list[np.ndarray] = list(map(
-                lambda x: x.get_padding_coords(),
+                lambda x: x.get_padding_coordinates(),
                 ships
             ))
 

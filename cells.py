@@ -29,7 +29,7 @@ CellTypes: dict[str, Cell] = {
     "ship": Cell('@', Fore.BLUE, Back.WHITE),
     "damaged": Cell('X', Fore.RED, Back.WHITE),
     "miss": Cell('•', Fore.BLACK, Back.WHITE),
-    "killed": Cell('X', Fore.WHITE, Back.RED),
-    "struck": Cell('0', Fore.YELLOW, Back.RESET),
-    "selected": Cell('S', Fore.BLACK, Back.BLACK)
+    # TODO: add use of: "killed": Cell('X', Fore.WHITE, Back.RED),
+    # TODO: add use of: "struck": Cell('0', Fore.YELLOW, Back.RESET),
+    "selected": Cell('S', Fore.BLACK, Back.WHITE)
 }
