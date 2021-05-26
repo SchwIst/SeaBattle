@@ -12,7 +12,7 @@ class Field(Display):
 
     possible_ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4]
 
-    ships: list[Ship] # TODO: MAKE PRIV
+    ships: list[Ship]  # TODO: MAKE PRIV
 
     _cells: list[list[Cell]]
 
@@ -26,7 +26,8 @@ class Field(Display):
         self._cells = []
         self.ships = []
 
-    from ._ship_action import create_ship, rotate_last_ship, move_last_ship, not_intersect_padding, not_intersect, pop_last_ship
+    from ._ship_action import create_ship, rotate_last_ship, move_last_ship, not_intersect_padding, not_intersect, \
+        pop_last_ship
     from ._creation import fill, _empty
 
     def get_cell(self, x: int, y: int):

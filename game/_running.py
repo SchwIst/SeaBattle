@@ -35,6 +35,7 @@ def set_computer_ships(self):
         if not self._computer.field.not_intersect_padding():
             self._computer.field.pop_last_ship()
 
+
 def play(self):
     pass
 

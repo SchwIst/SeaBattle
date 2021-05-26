@@ -1,8 +1,8 @@
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 
 from game.player import Cell
-from game.player.field import TYPES
 from game.player.field import Field
+from game.player.field import TYPES
 from game.utils import MessageBox
 
 

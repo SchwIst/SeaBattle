@@ -1,7 +1,7 @@
 import colorama
 
-from game.player.field import Field
 from game.player import Player
+from game.player.field import Field
 from game.utils import Display
 
 

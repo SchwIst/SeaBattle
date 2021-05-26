@@ -3,7 +3,7 @@ from typing import Union, Callable
 from game.player.field import Cell, TYPES
 from game.player.field import Field
 from game.player.field import Ship
-from game.utils import Display, move_print, MessageBox, FILE_TEMPLATE
+from game.utils import Display, move_print
 from .read_input import Input
 from .shooter import Shooter
 
