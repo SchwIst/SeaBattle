@@ -1,7 +1,7 @@
 from colorama import Fore, Back
 from colorama.ansi import AnsiBack, AnsiFore
 
-from utils import Display
+from game.utils import Display
 
 
 class Cell(Display):
@@ -20,11 +20,11 @@ class Cell(Display):
                self.text + \
                Fore.RESET + Back.RESET
 
-    def print(self):
+    def display(self):
         print(str(self), end='')
 
 
-CellTypes: dict[str, Cell] = {
+TYPES: dict[str, Cell] = {
     "empty": Cell(' ', Fore.WHITE, Back.WHITE),
     "ship": Cell('@', Fore.BLUE, Back.WHITE),
     "damaged": Cell('X', Fore.RED, Back.WHITE),
