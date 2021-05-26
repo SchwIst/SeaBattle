@@ -23,8 +23,9 @@ def cursor_end_position():
 
 class MessageBox(Display):
     message: str = ""
+    should_redraw: bool = False
 
-    def __init__(self, ):
+    def __init__(self):
         self._x, self._y = FILE_TEMPLATE["message_box"]["position"]
         self._width, self._height = FILE_TEMPLATE["message_box"]["size"]
 

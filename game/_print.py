@@ -20,6 +20,11 @@ def _print_field_template(self):
 
 
 def display(self):
+    if self.message_box.should_redraw:
+        self._print_field_template()
+        self.message_box.display()
+        self.message_box.should_redraw = False
+
     self._user.display()
 
     cursor_end_position()

@@ -2,7 +2,7 @@ import colorama
 
 from game.player import Player
 from game.player.field import Field
-from game.utils import Display
+from game.utils import Display, MessageBox
 
 
 class Game(Display):
@@ -26,6 +26,8 @@ class Game(Display):
         self._user = Player(self._fields[0], self._fields[1])
         self._computer = Player(self._fields[1], self._fields[0])
 
-    from ._running import run, set_user_ships, set_computer_ships
+        self.message_box = MessageBox()
+
+    from ._running import run, play, set_user_ships, set_computer_ships
 
     from ._creation import create_fields

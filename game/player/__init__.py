@@ -3,7 +3,7 @@ from typing import Union, Callable
 from game.player.field import Cell, TYPES
 from game.player.field import Field
 from game.player.field import Ship
-from game.utils import Display, move_print
+from game.utils import Display, move_print, FILE_TEMPLATE
 from .read_input import Input
 from .shooter import Shooter
 
@@ -24,8 +24,8 @@ class Player(Shooter, Display, Input):
         self.enemy_field = enemy_field
         self.enemy_field_hidden = enemy_field.clone()
 
-        self.chosen_position_x = 0
-        self.chosen_position_y = 0
+        self.chosen_position_x = 1
+        self.chosen_position_y = 1
 
     def get_enemy_field_hidden(self) -> Field:
         return self.enemy_field_hidden
@@ -34,13 +34,18 @@ class Player(Shooter, Display, Input):
         return self.enemy_field
 
     def get_shoot_coordinates(self) -> tuple[int, int]:
-        return self.chosen_position_x, self.chosen_position_y
+        return self.chosen_position_y, self.chosen_position_x
 
     def display(self):
         self.field.display()
-        self.enemy_field.display()
+        self.enemy_field_hidden.display()
 
-        move_print(str(TYPES["selected"]), self.chosen_position_x, self.chosen_position_y)
+        field_position_x, field_position_y = self.enemy_field_hidden.get_position()
+
+        cursor_x = self.chosen_position_x + field_position_x
+        cursor_y = self.chosen_position_y + field_position_y
+
+        move_print(str(TYPES["selected"]), cursor_x, cursor_y)
 
     def react_to_keys(self, pressed_key: bytes) -> Union[tuple[int, int], Callable[[Ship], None], bool]:
         _match: dict[bytes, Union[tuple[int, int], Callable[[Ship], None]], bool] = {
@@ -53,3 +58,14 @@ class Player(Shooter, Display, Input):
         }
 
         return _match[pressed_key]
+
+    def move_cursor(self, vector: tuple[int, int]):
+        if self.chosen_position_x + vector[0] not in range(
+                FILE_TEMPLATE["fields"][1]["size"][0]
+        ) or self.chosen_position_y + vector[1] not in range(
+            FILE_TEMPLATE["fields"][1]["size"][1]
+        ):
+            return
+
+        self.chosen_position_x += vector[0]
+        self.chosen_position_y += vector[1]

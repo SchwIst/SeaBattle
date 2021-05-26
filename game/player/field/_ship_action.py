@@ -1,6 +1,6 @@
 import random
-from collections import Callable
 
+from game.player.field.cells import TYPES
 from game.player.field.ship import Ship
 
 
@@ -67,11 +67,20 @@ def move_last_ship(self, vector: tuple[int, int]):
         self.ships[-1].move(-vector[0], -vector[1])
 
 
-def rotate_last_ship(self, func: Callable[[Ship], None]):
+def rotate_last_ship(self):
     if len(self.ships) > 0:
-        func(self.ships[-1])
+        self.ships[-1].rotate()
 
 
 def pop_last_ship(self):
     s = self.ships.pop()
     self.possible_ships.append(s.size)
+
+
+def bake_ships(self):
+    for ship in self.ships:
+        for y, x in ship.get_all_coordinates():
+            self.set_cell(x, y, TYPES["ship"])
+
+    for i in range(len(self.ships)):
+        self.ships.pop()

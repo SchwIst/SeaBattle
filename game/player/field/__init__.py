@@ -14,7 +14,7 @@ class Field(Display):
 
     ships: list[Ship]  # TODO: MAKE PRIV
 
-    _cells: list[list[Cell]]
+    cells: list[list[Cell]]  # TODO: MAKE PRIV
 
     def __init__(self, width: int, height: int, x: int, y: int):
         self._width = width
@@ -23,21 +23,24 @@ class Field(Display):
         self._x = x
         self._y = y
 
-        self._cells = []
+        self.cells = []
         self.ships = []
 
     from ._ship_action import create_ship, rotate_last_ship, move_last_ship, not_intersect_padding, not_intersect, \
-        pop_last_ship
+        pop_last_ship, bake_ships
     from ._creation import fill, _empty
 
     def get_cell(self, x: int, y: int):
-        return self._cells[y][x]
+        return self.cells[y][x]
 
     def set_cell(self, x: int, y: int, new_cell: Cell):
-        self._cells[y][x] = new_cell
+        self.cells[y][x] = new_cell
 
     def get_size(self) -> tuple[int, int]:
         return self._width, self._height
+
+    def get_position(self) -> tuple[int, int]:
+        return self._x, self._y
 
     def clone(self):
         new = Field(self._width, self._height, self._x, self._y)
@@ -47,7 +50,7 @@ class Field(Display):
         return new
 
     def display(self):
-        for x, row in enumerate(self._cells):
+        for x, row in enumerate(self.cells):
             for y, element in enumerate(row):
                 lx, ly = self._x + x, self._y + y
 
