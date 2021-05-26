@@ -26,6 +26,8 @@ class Field(Display):
         self.cells = []
         self.ships = []
 
+        self.possible_ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4]
+
     from ._ship_action import create_ship, rotate_last_ship, move_last_ship, not_intersect_padding, not_intersect, \
         pop_last_ship, bake_ships
     from ._creation import fill, _empty

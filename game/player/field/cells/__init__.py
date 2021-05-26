@@ -20,6 +20,13 @@ class Cell(Display):
                self.text + \
                Fore.RESET + Back.RESET
 
+    def __hash__(self) -> int:
+        return ord(self.text) * 31
+
+    @staticmethod
+    def from_hash(number: int):
+        return chr(int(number / 31))
+
     def display(self):
         print(str(self), end='')
 

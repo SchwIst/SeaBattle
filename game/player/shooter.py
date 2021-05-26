@@ -22,9 +22,9 @@ class Shooter:
             TYPES["ship"].text: ("Вы попали!! 😎", TYPES["damaged"]),
         }
 
-        text = self.enemy_field.get_cell(shoot_x, shoot_y).text
+        text = self.enemy_field.get_cell(shoot_y, shoot_x).text
         if text in _match.keys():
-            message, new_cell = _match[self.enemy_field.get_cell(shoot_x, shoot_y).text]
+            message, new_cell = _match[text]
 
             result_message_box.message = message
             result_message_box.should_redraw = True

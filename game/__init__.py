@@ -16,6 +16,8 @@ class Game(Display):
     from ._print import display, _clear
     from ._print import _print_field_template
 
+    from ._savings import save, restore
+
     def __init__(self):
         colorama.init()
 

@@ -58,5 +58,7 @@ def play(self):
 
 def run(self):
     # self.set_user_ships()
-    self.set_computer_ships()
+    # self.set_computer_ships()
+    # self.save()
+    self.restore()
     self.play()
