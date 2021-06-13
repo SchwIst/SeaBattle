@@ -1,8 +1,8 @@
 from tkinter import Canvas, Button, Radiobutton, IntVar, BooleanVar, Label, CENTER
 
-from battle_ship.cell import Cell_Act
-from battle_ship.game import game_statement
-from battle_ship.game.logic import get_halo_neigthbours_coords
+from cell import Cell_Act
+from game import game_statement
+from game.logic import get_halo_neigthbours_coords
 
 
 def init_tk(self):
@@ -115,9 +115,9 @@ def draw_point(self, field, x, y, offset_x):
         self.canvas_objects.append(self.id2)
 
 def draw_rectangle(self, x, y, offset_x, color):
-    self.id1 = self.canvas.create_rectangle(offset_x + x * 50, y * 50,
+    id1 = self.canvas.create_rectangle(offset_x + x * 50, y * 50,
                                 offset_x + x * 50 + 50, y * 50 + 50, fill=color)
-    self.canvas_objects.append(self.id1)
+    self.canvas_objects.append(id1)
 
 def draw_halo(self, field, x, y, list_prov, offset_x):
     for point in get_halo_neigthbours_coords(x, y):
@@ -176,19 +176,19 @@ def add_to_all(self, event):
         try:
             if self.is_field1_current_:
                 if x < 10 and y < 10 and self.field1.activated[y][x] == Cell_Act.non_fixed:
-                    self.draw_rectangle(self.field1, x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "green")
+                    self.draw_rectangle(x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "green")
                     self.field1.activated[y][x] = Cell_Act.half
                 elif self.field1.activated[y][x] == Cell_Act.half:
-                    self.draw_rectangle(self.field1, x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "white")
+                    self.draw_rectangle(x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "white")
                     self.field1.activated[y][x] = Cell_Act.non_fixed
             else:
                 print(y)
                 print(x)
                 if 10 + self.delta_menu_x <= x <= 10 + 10 + self.delta_menu_x and y < 10 and self.field2.activated[y][x - 10 - self.delta_menu_x] == Cell_Act.non_fixed:
-                    self.draw_rectangle(self.field2, x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "green")
+                    self.draw_rectangle(x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "green")
                     self.field2.activated[y][x - 10 - self.delta_menu_x] = Cell_Act.half
                 elif self.field2.activated[y][x - 10 - self.delta_menu_x] == Cell_Act.half:
-                    self.draw_rectangle(self.field2, x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "light yellow")
+                    self.draw_rectangle(x - 10 - self.delta_menu_x, y, 500 + self.menu_x, "light yellow")
                     self.field2.activated[y][x - 10 - self.delta_menu_x] = Cell_Act.non_fixed
         except Exception:
             pass

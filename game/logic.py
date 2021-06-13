@@ -2,9 +2,9 @@ import random
 import time
 from tkinter import Button, CENTER, Label, messagebox
 
-from battle_ship.cell import Cell_Act
-from battle_ship.game import game_statement
-from battle_ship.ship import Ship
+from cell import Cell_Act
+from game import game_statement
+from ship import Ship
 
 
 def auto_placement(self):
@@ -88,7 +88,7 @@ def change_player(self):
     self.is_field1_current_ = False
     for i in range(10):
         for j in range(10):
-            self.draw_rectangle(self.field1, i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
+            self.draw_rectangle(i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
     self.go_to.place_forget()
     self.end.place_forget()
     self.manual_placement()
@@ -142,7 +142,7 @@ def check_place(self, field):
                         is_right = False
             if is_right and self.index < 10:
                 if 1 <= self.index + 1 <= 2:
-                    self.t3.place(x=500 + self.menu_x // 2 - self.t3.winfo_reqwidth() // 2, y=220)
+                    self.t3_1.place(x=500 + self.menu_x // 2 - self.t3_1.winfo_reqwidth() // 2, y=220)
                 elif 3 <= self.index + 1 <= 5:
                     self.t2.place(x=500 + self.menu_x // 2 - self.t2.winfo_reqwidth() // 2, y=220)
                 elif 6 <= self.index + 1 <= 9:
@@ -156,16 +156,16 @@ def check_place(self, field):
                             field.activated[j][i] = Cell_Act.fixed
                             field.ships[j][i] = self.ships_list[self.index]  # "переводим" в ships
                             if self.is_field1_current_:
-                                self.draw_rectangle(field, i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "yellow")
+                                self.draw_rectangle(i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "yellow")
                             else:
-                                self.draw_rectangle(field, i, j, 500 + self.menu_x, "yellow")
+                                self.draw_rectangle(i, j, 500 + self.menu_x, "yellow")
 
                 if self.index == 9 and is_right:  # если кончились корабли
                     self.right.place_forget()
                     self.wrong.place_forget()
                     self.t1.place_forget()
                     self.t2.place_forget()
-                    self.t3.place_forget()
+                    self.t3_1.place_forget()
                     self.t4.place_forget()
                     self.but.place_forget()
                     self.end.place(x=500 + self.menu_x // 2 - self.wrong.winfo_reqwidth() // 2, y=150)
@@ -190,15 +190,15 @@ def change_mode(self, play):
     if self.computer_vs_human:
         for i in range(10):
             for j in range(10):
-                self.draw_rectangle(self.field1, i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
-        self.field2.generate_ships()
+                self.draw_rectangle(i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
+        self.field2.generate_ships(self.pc_shoot_avaliable)
     else:
         for i in range(10):
             for j in range(10):
-                self.draw_rectangle(self.field1, i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
+                self.draw_rectangle(i - 10 - self.delta_menu_x, j, 500 + self.menu_x, "white")
         for i in range(10):
             for j in range(10):
-                self.draw_rectangle(self.field1, i, j, 500 + self.menu_x, "light yellow")
+                self.draw_rectangle(i, j, 500 + self.menu_x, "light yellow")
     play.place_forget()
 
 
@@ -224,16 +224,17 @@ def manual_placement(self):
 
     self.end = Label(self.tk, text="Расстановка \n завершена", font=("Arial", 10,))
     self.go_to = Button(self.tk, text="Перейти к \n следующему игроку",
-                        command=lambda: self.change_player(self.go_to, self.end))
+                        command=lambda: self.change_player())
     self.play = Button(self.tk, text="Играть!", command=lambda: self.change_mode(self.play))
 
     self.t4.place(x=500 + self.menu_x // 2 - self.t4.winfo_reqwidth() // 2, y=220)
     if self.is_field1_current_:
         self.but = Button(self.tk, text="Следующий корабль",
-                          command=lambda: self.check_place(self, self.field1))
+                          command=lambda: check_place(self,
+                                                      self.field1))
     else:
         self.but = Button(self.tk, text="Следующий корабль",
-                          command=lambda: self.check_place(self, self.field2))
+                          command=lambda: check_place(self, self.field2))
     self.but.place(x=500 + self.menu_x // 2 - self.but.winfo_reqwidth() // 2, y=260)
 
 

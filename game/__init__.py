@@ -2,7 +2,7 @@ import time
 from enum import Enum
 from tkinter import Tk
 
-from battle_ship.field import Field
+from field import Field
 
 
 class game_statement(Enum):
