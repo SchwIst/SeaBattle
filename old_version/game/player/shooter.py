@@ -1,9 +1,9 @@
 from abc import abstractmethod
 
-from game.player import Cell
-from game.player.field import Field
-from game.player.field import TYPES
-from game.utils import MessageBox
+from old_version.game.player import Cell
+from old_version.game.player.field import Field
+from old_version.game.player.field import TYPES
+from old_version.game.utils import MessageBox
 
 
 class Shooter:

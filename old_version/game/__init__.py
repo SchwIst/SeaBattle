@@ -1,8 +1,8 @@
 import colorama
 
-from game.player import Player
-from game.player.field import Field
-from game.utils import Display, MessageBox
+from old_version.game.player import Player
+from old_version.game.player.field import Field
+from old_version.game.utils import Display, MessageBox
 
 
 class Game(Display):

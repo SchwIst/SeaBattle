@@ -1,4 +1,4 @@
-from game.player.field.cells import TYPES
+from old_version.game.player.field.cells import TYPES
 
 
 def _empty(self):

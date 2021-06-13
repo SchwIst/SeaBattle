@@ -1,5 +1,5 @@
-from game.player.field import Field
-from game.utils import FILE_TEMPLATE
+from old_version.game.player.field import Field
+from old_version.game.utils import FILE_TEMPLATE
 
 
 def create_fields(self):

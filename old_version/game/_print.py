@@ -1,6 +1,6 @@
 import os
 
-from game.utils import FILE_TEMPLATE, cursor_end_position
+from old_version.game.utils import FILE_TEMPLATE, cursor_end_position
 
 
 def _clear():

@@ -1,7 +1,7 @@
 from colorama import Fore, Back
 from colorama.ansi import AnsiBack, AnsiFore
 
-from game.utils import Display
+from old_version.game.utils import Display
 
 
 class Cell(Display):

@@ -1,9 +1,9 @@
 import operator
 import functools
 
-from game import Field
-from game.player import Cell
-from game.utils import FILE_TEMPLATE
+from old_version.game import Field
+from old_version.game.player import Cell
+from old_version.game.utils import FILE_TEMPLATE
 
 
 def save(self):

@@ -1,4 +1,4 @@
-from game.utils import FILE_TEMPLATE
+from old_version.game.utils import FILE_TEMPLATE
 
 
 def move(self, offset_x: int, offset_y: int):

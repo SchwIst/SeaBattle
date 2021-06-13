@@ -1,7 +1,7 @@
 import random
 
-from game.player.field.cells import TYPES
-from game.player.field.ship import Ship
+from old_version.game.player.field.cells import TYPES
+from old_version.game.player.field.ship import Ship
 
 
 def create_ship(self) -> bool:

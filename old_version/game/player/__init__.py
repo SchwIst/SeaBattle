@@ -1,9 +1,9 @@
 from typing import Union, Callable
 
-from game.player.field import Cell, TYPES
-from game.player.field import Field
-from game.player.field import Ship
-from game.utils import Display, move_print, FILE_TEMPLATE
+from old_version.game.player.field import TYPES
+from old_version.game.player.field import Field
+from old_version.game.player.field import Ship
+from old_version.game.utils import Display, move_print, FILE_TEMPLATE
 from .read_input import Input
 from .shooter import Shooter
 

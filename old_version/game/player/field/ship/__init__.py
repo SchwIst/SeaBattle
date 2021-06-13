@@ -1,5 +1,5 @@
-from game.player.field.cells import TYPES
-from game.utils import Display, move_print
+from old_version.game.player.field.cells import TYPES
+from old_version.game.utils import Display, move_print
 
 
 class Ship(Display):
